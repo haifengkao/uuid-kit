@@ -9,6 +9,22 @@ UUIDKit is a modern Swift library designed for generating and manipulating Unive
 - **RFC 4122 Compliance**: Create and manage UUIDs conforming to the RFC 4122 standard.
 - **Native Cryptography**: Harness the power and security of Apple's `CryptoKit`.
 
+## Usage
+
+For detailed instructions and examples on how to use `UUIDKit`, please refer to the original project's README at the [baarde/uuid-kit GitHub repository](https://github.com/baarde/uuid-kit).
+
+However, here's a basic example to get you started:
+
+```swift
+import UUIDKit
+
+let uuidv3 = UUID.v3(name: "thats.an.example", namespace: .dns)
+let uuidv5 = UUID.v5(name: "http://example.com/index.html", namespace: .url)
+```
+
+For more intricate uses, like manipulating specific parts of a UUID or performing specific cryptographic operations with `CryptoKit`, please consult the aforementioned repository.
+
+
 ## Installation Instructions
 
 ### Using Swift Package Manager with Xcode:

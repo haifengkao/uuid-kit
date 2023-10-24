@@ -1,4 +1,4 @@
-import Crypto
+import CryptoKit
 import Foundation
 
 extension UUID {
@@ -29,14 +29,14 @@ extension UUID {
 
 public struct UUIDv5: Codable, Hashable, LosslessStringConvertible, RawRepresentable {
     public init<T>(name: T, namespace: UUID.Namespace) where T: Collection, T.Element == UInt8 {
-        var hash = Crypto.Insecure.SHA1()
+        var hash = CryptoKit.Insecure.SHA1()
         hash.update(uuid: namespace.rawValue)
         hash.update(collection: name)
         rawValue = UUID(digest: hash.finalize(), version: 5)
     }
     
     public init<T>(name: T, namespace: UUID.Namespace) where T: DataProtocol {
-        var hash = Crypto.Insecure.SHA1()
+        var hash = CryptoKit.Insecure.SHA1()
         hash.update(uuid: namespace.rawValue)
         hash.update(data: name)
         rawValue = UUID(digest: hash.finalize(), version: 5)

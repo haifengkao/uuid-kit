@@ -1,50 +1,44 @@
-# UUIDKit
+# UUIDKit 🌍
 
-[![MIT License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](LICENSE)
-[![Swift 5.1](https://img.shields.io/badge/swift-5.1-brightgreen.svg)](https://swift.org)
+UUIDKit is a modern Swift library designed for generating and manipulating Universally Unique Identifiers (UUIDs) in adherence to [RFC 4122](https://tools.ietf.org/html/rfc4122.html) standards.
 
-UUIDKit is a Swift library for generating and working with Universally Unique Identifiers (UUIDs) as specified in [RFC 4122](https://tools.ietf.org/html/rfc4122.html).
+🔒 **Secure by Default**: UUIDKit has transitioned to using Apple's built-in `CryptoKit` for cryptographic operations, ensuring robust security without relying on external open-source solutions.
 
-It extends the existing Foundation's [`UUID`](https://developer.apple.com/documentation/foundation/uuid) type.
+## Features
 
-## Generating UUIDs
+- **RFC 4122 Compliance**: Create and manage UUIDs conforming to the RFC 4122 standard.
+- **Native Cryptography**: Harness the power and security of Apple's `CryptoKit`.
 
-The default initializer for `UUID` returns a random (version 4) UUID. This library adds methods for creating version 1, version 3 and version 5 UUIDs.
+## Installation Instructions
 
-### Time-based UUIDs (UUID.v1)
+### Using Swift Package Manager with Xcode:
 
-`UUID.v1` returns a time-based (version 1) UUID.
+1. **Open your Xcode project**: Launch Xcode and open your target project or create a new one.
+
+2. **Navigate to File > Swift Packages > Add Package Dependency**: This will open a new window where you can search or enter the URL of a Swift package.
+
+3. **Enter the Repository URL**: In the search bar, paste the following URL:
+```
+https://github.com/haifengkao/uuid-kit
+```
+Then, click the "Next" button.
+
+4. **Choose the Version or Branch**: Select the version or branch you want to use. For the latest stable version, it's usually recommended to select the default version provided. Click "Next".
+
+5. **Select the Target**: Decide which target in your Xcode project you want to add the library to. After selecting, click "Finish".
+
+6. **Import and Use**: Now, in any Swift file within that target, you can simply use:
+```swift
+import UUIDKit
+```
+to access the library's functionality.
+
+### Using Swift Package Manager from the Command Line:
+
+If you prefer working from the terminal and have a Swift package, you can add `UUIDKit` as a dependency by adding the following to the `dependencies` value of your `Package.swift`:
 
 ```swift
-let uuidv1 = UUID.v1()
+dependencies: [
+    .package(url: "https://github.com/haifengkao/uuid-kit", from: "0.2.0")
+]
 ```
-
-Instead of relying on the computer's Ethernet address to ensure global uniqueness of time-based UUIDs, this method generates a random node identifier that is used for the duration of the program's execution, as specified in [RFC 4122 section 4.5](https://datatracker.ietf.org/doc/html/rfc4122.html#section-4.5). The reason is discussed in [this issue](https://github.com/baarde/uuid-kit/issues/4).
-
-### Random UUIDs (UUID.v4)
-
-`UUID.v4` returns a random (version 4) UUID. You may pass a custom random number generator.
-
-```swift
-var generator = SystemRandomNumberGenerator()
-let uuidv4 = UUID.v4(using: generator)
-```
-
-### Name-based UUIDs (UUID.v3 and UUID.v5)
-
-`UUID.v3` and `UUID.v5` return name-based UUIDs using either MD5 (version 3) or SHA-1 (version 5) hashing.
-
-```swift
-let uuidv3 = UUID.v3(name: "thats.an.example", namespace: .dns)
-let uuidv5 = UUID.v5(name: "http://example.com/index.html", namespace: .url)
-```
-
-Name-based UUIDs are built by combining a unique name with a namespace identifier. UUIDKit contains a list of pre-defined namespaces (`.dns`, `.url`, `.oid` and `.x500`); but any UUID may be used as a namespace.
-
-```swift
-let customNamespace = UUID.Namespace(UUID(uuidString: "34cd6bf4-3f41-4717-95ea-131762f60af8")!)
-```
-
-## License
-
-This project is licensed for use under the MIT License (MIT). Please see the [LICENSE](LICENSE) file for more information.
